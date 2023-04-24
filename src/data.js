@@ -1,5 +1,3 @@
-import "./styles.css";
-
 // key 7d3bc585323a47ed8b482529232204
 
 // get input from search bar
