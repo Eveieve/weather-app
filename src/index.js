@@ -11,13 +11,30 @@ import "./styles.css";
 
 const searchBar = document.querySelector(".search-bar");
 
-async function getWeather() {
+async function getCurrentWeather() {
+  // current weather
   const searchValue = searchBar.value;
 
-  const URL = `https://api.weatherapi.com/v1/current.json?key=7d3bc585323a47ed8b482529232204&q=${searchValue}`;
+  try {
+    const URL = `https://api.weatherapi.com/v1/current.json?key=7d3bc585323a47ed8b482529232204&q=${searchValue}`;
+    const response = await fetch(URL, { mode: "cors" });
+    const data = await response.json();
+    console.log(data);
+    console.log(data.current.condition.text); // partly cloudy
+    console.log(data.current.feelslike_c);
+    console.log(data.current.feelslike_f);
+    console.log();
+  } catch (error) {
+    console.error(error); // couldn't fetch API?
+  }
+}
+
+async function getForecast() {
+  const searchValue = searchBar.value;
+
+  const URL = `https://api.weatherapi.com/v1/forecast.json?key=7d3bc585323a47ed8b482529232204&q=${searchValue}`;
 
   const response = await fetch(URL, { mode: "cors" });
-
   const data = await response.json();
   console.log(data);
 }
@@ -25,6 +42,7 @@ async function getWeather() {
 searchBar.addEventListener("keypress", (e) => {
   if (e.key === "Enter") {
     e.preventDefault();
-    getWeather();
+    getCurrentWeather();
+    getForecast();
   }
 });
