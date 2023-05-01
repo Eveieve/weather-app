@@ -96,7 +96,7 @@ async function renderData() {
 
   const tempC = document.querySelector(".tempC");
 
-  tempC.textContent = `${data.temp_c}`;
+  tempC.textContent = `${data.temp_c} °C`;
 
   const chanceOfRain = document.querySelector("div");
   chanceOfRain.textContent = `${data.daily_chance_of_rain}%`;
@@ -119,11 +119,11 @@ async function renderData() {
 
   const toggleTempDisplay = () => {
     if (tempC.className === "tempC") {
-      tempC.textContent = `${data.temp_f}`;
+      tempC.textContent = `${data.temp_f} °F`;
       tempC.className = "tempF";
       tempSwitch.textContent = "show in Celsius";
     } else {
-      tempC.textContent = `${data.temp_c}`;
+      tempC.textContent = `${data.temp_c} °C`;
       tempC.className = "tempC";
       tempSwitch.textContent = "show in Fahrenheit";
     }
