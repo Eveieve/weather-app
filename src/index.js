@@ -114,15 +114,18 @@ async function renderData() {
   );
 
   const tempSwitch = document.querySelector(".temp-switch");
+  tempSwitch.textContent = "show in Fahrenheit";
   //  const classes = tempSwitch.classList;
 
   const toggleTempDisplay = () => {
     if (tempC.className === "tempC") {
       tempC.textContent = `${data.temp_f}`;
       tempC.className = "tempF";
+      tempSwitch.textContent = "show in Celsius";
     } else {
       tempC.textContent = `${data.temp_c}`;
       tempC.className = "tempC";
+      tempSwitch.textContent = "show in Fahrenheit";
     }
   };
 
