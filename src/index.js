@@ -26,8 +26,7 @@ async function getForecast() {
     // code for changing background
     const { code, text: current_condition } = data.current.condition;
 
-    const { temp_c, feelslike_c, temp_f, feelslike_f, current_humidity } =
-      data.current;
+    const { temp_c, feelslike_c, temp_f, feelslike_f, humidity } = data.current;
 
     // forecast for day - astro
     const { moonrise, moon_phase, sunrise, sunset } =
@@ -57,7 +56,7 @@ async function getForecast() {
       feelslike_c,
       temp_f,
       feelslike_f,
-      current_humidity,
+      humidity,
       moonrise,
       moon_phase,
       sunrise,
@@ -99,17 +98,31 @@ async function renderData() {
   tempC.textContent = `${data.temp_c}`;
 
   const chanceOfRain = document.querySelector("div");
-  chanceOfRain.textContent = `${data.daily_chance_of_rain}`;
+  chanceOfRain.textContent = `${data.daily_chance_of_rain}%`;
 
-  info.append(condition, city, country, localTime, tempC, chanceOfRain);
+  const humidity = document.querySelector(".humidity");
+  humidity.textContent = `${data.humidity}`;
+  info.append(
+    condition,
+    city,
+    country,
+    localTime,
+    tempC,
+    chanceOfRain,
+    humidity
+  );
 
-  // right side
-  // const feelsLikeC = document.querySelector("div");
-  // feelsLikeC.textContent = `${data.feelslike_c}`;
+  const tempSwitch = document.querySelector(".temp-switch");
+  //  const classes = tempSwitch.classList;
 
-  // info.append(feelsLikeC);
-  // feelslike_c
-  // current_humidity
+  const getTempF = () => {
+    tempC.textContent = `${data.temp_f}`;
+  };
+
+  tempSwitch.addEventListener("click", () => {
+    getTempF();
+  });
+
   const background = document.querySelector("body");
   background.classList.add("background");
 
@@ -125,7 +138,6 @@ async function renderData() {
 
     case 1030:
       background.className = "mist";
-
       console.log("mist");
       break;
 
@@ -140,12 +152,10 @@ async function renderData() {
       1198 ||
       1201:
       background.className = "rain";
-
       console.log("rain");
       break;
     case 1255 || 1258 || 1261 || 1264:
       background.className = "snow";
-
       console.log("snow");
       break;
     case 1273 || 1276 || 1279:
@@ -154,7 +164,6 @@ async function renderData() {
       break;
     default:
       background.className = "sunny";
-      // statement
       console.log("default");
   }
 }
