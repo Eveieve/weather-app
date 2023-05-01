@@ -20,10 +20,12 @@ async function getForecast() {
   try {
     const response = await fetch(URL, { mode: "cors" }); // fetch only throws an error if there's disconnection
     const data = await response.json();
-
+    console.log(data);
     const { country, localtime, name: city } = data.location;
 
-    const current_condition = data.current.condition.text;
+    // code for changing background
+    const { code, text: current_condition } = data.current.condition;
+
     const { temp_c, feelslike_c, temp_f, feelslike_f, current_humidity } =
       data.current;
 
@@ -50,6 +52,7 @@ async function getForecast() {
       country,
       localtime,
       current_condition,
+      code,
       temp_c,
       feelslike_c,
       temp_f,
@@ -107,6 +110,55 @@ async function renderData() {
   // info.append(feelsLikeC);
   // feelslike_c
   // current_humidity
+  const background = document.querySelector("body");
+  background.classList.add("background");
+
+  switch (data.code) {
+    case 1000:
+      console.log("1000 sunny");
+      background.className = "sunny";
+      // sunny image
+      // have a background node element have a sunny image class
+      // set a corresponding class in css
+      break;
+    case 1003 || 1006 || 1009:
+      background.className = "cloudy";
+      console.log("cloudy");
+      break;
+
+    case 1030:
+      background.className = "mist";
+
+      console.log("mist");
+      break;
+
+    case 1063 ||
+      1150 ||
+      1153 ||
+      1183 ||
+      1186 ||
+      1189 ||
+      1192 ||
+      1195 ||
+      1198 ||
+      1201:
+      background.className = "rain";
+
+      console.log("rain");
+      break;
+    case 1255 || 1258 || 1261 || 1264:
+      background.className = "snow";
+
+      console.log("snow");
+      break;
+    case 1273 || 1276 || 1279:
+      background.className = "thunder";
+      console.log("thunder");
+      break;
+    default:
+      // statement
+      console.log("default");
+  }
 }
 
 function changeBackground(data) {
@@ -116,21 +168,6 @@ function changeBackground(data) {
   // else if data.current_condition.code === 1003 || 1006 || 1009
   // upload cloudy image
   // else if data.current_condition.code === 1114 || 1117 ||
-  switch (data.current_condition.code) {
-    case 1000:
-      console.log("1000 sunny");
-      // sunny image
-      // have a background node element have a sunny image class
-      // set a corresponding class in css
-      break;
-    case 1003 || 1006 || 1009:
-      console.log("cloudy");
-      break;
-
-    default:
-      // statement
-      console.log("default");
-  }
 }
 
 searchBar.addEventListener("keypress", (e) => {
