@@ -24,19 +24,15 @@ async function getForecast() {
     const { country, localtime, name: city } = data.location;
 
     const current_condition = data.current.condition.text;
-    const {
-      temp_c,
-      feelslike_c,
-      temp_f,
-      feelslike_f,
-      humidity: current_humidity,
-    } = data.current;
+    const { temp_c, feelslike_c, temp_f, feelslike_f, current_humidity } =
+      data.current;
 
     // forecast for day - astro
     const { moonrise, moon_phase, sunrise, sunset } =
       data.forecast.forecastday[0].astro;
 
     const conditionForDay = data.forecast.forecastday[0].day.condition.text;
+
     const {
       daily_chance_of_rain,
       daily_chance_of_snow,
@@ -79,17 +75,11 @@ async function getForecast() {
   }
   return null;
 }
+const weatherData = await getForecast();
+
 const info = document.querySelector(".info");
 
-async function renderData() {
-  const data = await getForecast();
-
-  // create dom elements and append
-
-  // current_condition
-  // city, country
-  // local time
-  // temp_c
+function renderData(data) {
   const condition = document.createElement("div");
   condition.textContent = `${data.current_condition}`;
 
@@ -104,24 +94,48 @@ async function renderData() {
   const tempC = document.createElement("div");
   tempC.textContent = `${data.temp_c}`;
 
-  const rain = document.createElement("div");
-  rain.textContent = `${data.daily_chance_of_rain}`;
-  info.append(condition, city, country, tempC, rain);
+  const chanceOfRain = document.createElement("div");
+  chanceOfRain.textContent = `${data.daily_chance_of_rain}`;
+
+  info.append(condition, city, country, localTime, tempC, chanceOfRain);
 
   // right side
-  const feelsLikeC = document.createElement("div");
-  feelsLikeC.textContent = `${data.feelslike_c}`;
+  // const feelsLikeC = document.createElement("div");
+  // feelsLikeC.textContent = `${data.feelslike_c}`;
 
-  info.append(feelsLikeC);
+  // info.append(feelsLikeC);
   // feelslike_c
   // current_humidity
-  // daily_chance_of_rain
+}
+
+function changeBackground(data) {
+  // if data is data.current_condition.code === 1000
+  // upload sunny/clear image
+  // else if data.current_condition.code
+  // else if data.current_condition.code === 1003 || 1006 || 1009
+  // upload cloudy image
+  // else if data.current_condition.code === 1114 || 1117 ||
+  switch (data.current_condition.code) {
+    case 1000:
+      console.log("1000 sunny");
+      // sunny image
+      // have a background node element have a sunny image class
+      // set a corresponding class in css
+      break;
+    case 1003 || 1006 || 1009:
+      console.log("cloudy");
+      break;
+
+    default:
+      // statement
+      console.log("default");
+  }
 }
 
 searchBar.addEventListener("keypress", (e) => {
   if (e.key === "Enter") {
     e.preventDefault();
-    renderData();
-    console.log(getForecast());
+    renderData(weatherData);
+    changeBackground(weatherData);
   }
 });
