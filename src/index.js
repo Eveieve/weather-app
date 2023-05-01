@@ -95,6 +95,7 @@ async function renderData() {
   localTime.textContent = `${data.localtime}`;
 
   const tempC = document.querySelector(".tempC");
+
   tempC.textContent = `${data.temp_c}`;
 
   const chanceOfRain = document.querySelector("div");
@@ -115,12 +116,18 @@ async function renderData() {
   const tempSwitch = document.querySelector(".temp-switch");
   //  const classes = tempSwitch.classList;
 
-  const getTempF = () => {
-    tempC.textContent = `${data.temp_f}`;
+  const toggleTempDisplay = () => {
+    if (tempC.className === "tempC") {
+      tempC.textContent = `${data.temp_f}`;
+      tempC.className = "tempF";
+    } else {
+      tempC.textContent = `${data.temp_c}`;
+      tempC.className = "tempC";
+    }
   };
 
   tempSwitch.addEventListener("click", () => {
-    getTempF();
+    toggleTempDisplay();
   });
 
   const background = document.querySelector("body");
