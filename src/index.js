@@ -20,7 +20,6 @@ async function getForecast() {
   try {
     const response = await fetch(URL, { mode: "cors" }); // fetch only throws an error if there's disconnection
     const data = await response.json();
-    console.log(data);
 
     const { country, localtime, name: city } = data.location;
 
@@ -80,11 +79,49 @@ async function getForecast() {
   }
   return null;
 }
+const info = document.querySelector(".info");
+
+async function renderData() {
+  const data = await getForecast();
+
+  // create dom elements and append
+
+  // current_condition
+  // city, country
+  // local time
+  // temp_c
+  const condition = document.createElement("div");
+  condition.textContent = `${data.current_condition}`;
+
+  const city = document.createElement("div");
+  city.textContent = `${data.city}`;
+
+  const country = document.createElement("div");
+  country.textContent = `${data.country}`;
+  const localTime = document.createElement("div");
+  localTime.textContent = `${data.localtime}`;
+
+  const tempC = document.createElement("div");
+  tempC.textContent = `${data.temp_c}`;
+
+  const rain = document.createElement("div");
+  rain.textContent = `${data.daily_chance_of_rain}`;
+  info.append(condition, city, country, tempC, rain);
+
+  // right side
+  const feelsLikeC = document.createElement("div");
+  feelsLikeC.textContent = `${data.feelslike_c}`;
+
+  info.append(feelsLikeC);
+  // feelslike_c
+  // current_humidity
+  // daily_chance_of_rain
+}
 
 searchBar.addEventListener("keypress", (e) => {
   if (e.key === "Enter") {
     e.preventDefault();
-    getForecast();
+    renderData();
     console.log(getForecast());
   }
 });
