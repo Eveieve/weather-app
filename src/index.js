@@ -84,27 +84,27 @@ const info = document.querySelector(".info");
 async function renderData() {
   const data = await getForecast();
 
-  const condition = document.createElement("div");
+  const condition = document.querySelector(".condition");
   condition.textContent = `${data.current_condition}`;
 
-  const city = document.createElement("div");
+  const city = document.querySelector(".city");
   city.textContent = `${data.city}`;
 
-  const country = document.createElement("div");
+  const country = document.querySelector(".country");
   country.textContent = `${data.country}`;
-  const localTime = document.createElement("div");
+  const localTime = document.querySelector(".local-time");
   localTime.textContent = `${data.localtime}`;
 
-  const tempC = document.createElement("div");
+  const tempC = document.querySelector(".tempC");
   tempC.textContent = `${data.temp_c}`;
 
-  const chanceOfRain = document.createElement("div");
+  const chanceOfRain = document.querySelector("div");
   chanceOfRain.textContent = `${data.daily_chance_of_rain}`;
 
   info.append(condition, city, country, localTime, tempC, chanceOfRain);
 
   // right side
-  // const feelsLikeC = document.createElement("div");
+  // const feelsLikeC = document.querySelector("div");
   // feelsLikeC.textContent = `${data.feelslike_c}`;
 
   // info.append(feelsLikeC);
@@ -117,9 +117,6 @@ async function renderData() {
     case 1000:
       console.log("1000 sunny");
       background.className = "sunny";
-      // sunny image
-      // have a background node element have a sunny image class
-      // set a corresponding class in css
       break;
     case 1003 || 1006 || 1009:
       background.className = "cloudy";
@@ -156,24 +153,16 @@ async function renderData() {
       console.log("thunder");
       break;
     default:
+      background.className = "sunny";
       // statement
       console.log("default");
   }
-}
-
-function changeBackground(data) {
-  // if data is data.current_condition.code === 1000
-  // upload sunny/clear image
-  // else if data.current_condition.code
-  // else if data.current_condition.code === 1003 || 1006 || 1009
-  // upload cloudy image
-  // else if data.current_condition.code === 1114 || 1117 ||
 }
 
 searchBar.addEventListener("keypress", (e) => {
   if (e.key === "Enter") {
     e.preventDefault();
     renderData();
-    // changeBackground(weatherData);
+    searchBar.value = "";
   }
 });
