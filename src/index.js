@@ -75,11 +75,12 @@ async function getForecast() {
   }
   return null;
 }
-const weatherData = await getForecast();
 
 const info = document.querySelector(".info");
 
-function renderData(data) {
+async function renderData() {
+  const data = await getForecast();
+
   const condition = document.createElement("div");
   condition.textContent = `${data.current_condition}`;
 
@@ -135,7 +136,7 @@ function changeBackground(data) {
 searchBar.addEventListener("keypress", (e) => {
   if (e.key === "Enter") {
     e.preventDefault();
-    renderData(weatherData);
-    changeBackground(weatherData);
+    renderData();
+    // changeBackground(weatherData);
   }
 });
