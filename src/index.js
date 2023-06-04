@@ -79,29 +79,30 @@ async function getForecast() {
 }
 
 const info = document.querySelector(".info");
+const condition = document.querySelector(".condition");
+const city = document.querySelector(".city");
+const localTime = document.querySelector(".local-time");
+const tempC = document.querySelector(".tempC");
+const country = document.querySelector(".country");
+const humidity = document.querySelector(".humidity");
+const tempSwitch = document.querySelector(".temp-switch");
+const chanceOfRain = document.querySelector(".chance-of-rain");
 
 async function renderData() {
-  const data = await getForecast();
+  const data = await getForecast(); // personalized data
 
-  const condition = document.querySelector(".condition");
   condition.textContent = `${data.current_condition}`;
 
-  const city = document.querySelector(".city");
   city.textContent = `${data.city}`;
 
-  const country = document.querySelector(".country");
   country.textContent = `${data.country}`;
-  const localTime = document.querySelector(".local-time");
+
   localTime.textContent = `${data.localtime}`;
 
-  const tempC = document.querySelector(".tempC");
+  tempC.textContent = `${data.temp_c} °C`;
 
-  if (tempC) tempC.textContent = `${data.temp_c} °C`;
-
-  const chanceOfRain = document.querySelector("div");
   chanceOfRain.textContent = `${data.daily_chance_of_rain}%`;
 
-  const humidity = document.querySelector(".humidity");
   humidity.textContent = `${data.humidity}`;
   info.append(
     condition,
@@ -113,7 +114,6 @@ async function renderData() {
     humidity
   );
 
-  const tempSwitch = document.querySelector(".temp-switch");
   tempSwitch.textContent = "show in Fahrenheit";
   //  const classes = tempSwitch.classList;
 
