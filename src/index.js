@@ -10,6 +10,8 @@ import "./styles.css";
 
 // https://api.weatherapi.com/v1/current.json?q=london
 
+// local storage
+
 const searchBar = document.querySelector(".search-bar");
 
 async function getForecast() {
@@ -90,7 +92,6 @@ const chanceOfRain = document.querySelector(".chance-of-rain");
 
 async function renderData() {
   const data = await getForecast(); // personalized data
-
   condition.textContent = `${data.current_condition}`;
 
   city.textContent = `${data.city}`;
@@ -99,11 +100,11 @@ async function renderData() {
 
   localTime.textContent = `${data.localtime}`;
 
-  tempC.textContent = `${data.temp_c} °C`;
+  tempC.textContent = `${data.temp_c}°C`;
 
-  chanceOfRain.textContent = `${data.daily_chance_of_rain}%`;
+  chanceOfRain.textContent = `chance of rain: ${data.daily_chance_of_rain}%`;
 
-  humidity.textContent = `${data.humidity}`;
+  humidity.textContent = `humidity: ${data.humidity}%`;
   info.append(
     condition,
     city,
@@ -160,7 +161,8 @@ async function renderData() {
       1192 ||
       1195 ||
       1198 ||
-      1201:
+      1201 ||
+      data.contains("rain"):
       background.className = "rain";
       console.log("rain");
       break;
@@ -182,6 +184,7 @@ searchBar.addEventListener("keypress", (e) => {
   if (e.key === "Enter") {
     e.preventDefault();
     renderData();
+
     searchBar.value = "";
   }
 });

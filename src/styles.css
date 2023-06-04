@@ -1,3 +1,22 @@
+:root {
+    --light: hsla(0,0%,100%,.5);
+}
+body {
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.info {
+    background-color: var(--light);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items:center;
+    padding: 2rem;
+    border-radius: 5px;
+}
 
 .tempSwitch{
  cursor: pointer;
