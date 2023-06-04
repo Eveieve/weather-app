@@ -96,7 +96,7 @@ async function renderData() {
 
   const tempC = document.querySelector(".tempC");
 
-  tempC.textContent = `${data.temp_c} °C`;
+  if (tempC) tempC.textContent = `${data.temp_c} °C`;
 
   const chanceOfRain = document.querySelector("div");
   chanceOfRain.textContent = `${data.daily_chance_of_rain}%`;
