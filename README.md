@@ -1,9 +1,7 @@
 # weather-app
-A weather app for viewing forecasts. 
-This project is part of The Odin Project's full stack javaScript curriculum. 
-
-sunny: 
-image.png
+An app for viewing weather forecasts. This project is part of The Odin Project's full stack javaScript curriculum. 
+![screenshot](../src/preview.png)
+Click [here](https://eveieve.github.io/weather-app/) for a  live preview. 
 
 ## technologies 
 javaScript, CSS, HTML
@@ -12,7 +10,7 @@ This project is built for learning.
 The objectives are to 
 
 * utilize a public weather API for viewing weather forecasts 
-* understand API keys and the basic security measures
+* understand API keys and their basic security measures
 
 # features 
 
