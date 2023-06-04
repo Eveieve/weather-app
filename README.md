@@ -1,6 +1,6 @@
 # weather-app
 An app for viewing weather forecasts. This project is part of The Odin Project's full stack javaScript curriculum. 
-![screenshot](../src/preview.png)
+![screenshot](./src/preview.png)
 Click [here](https://eveieve.github.io/weather-app/) for a  live preview. 
 
 ## technologies 
