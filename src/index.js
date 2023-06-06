@@ -119,11 +119,11 @@ async function renderData() {
   //  const classes = tempSwitch.classList;
 
   const toggleTempDisplay = () => {
-    if (tempC.className === "tempC") {
+    if (tempC.className ==="tempC") {
       tempC.textContent = `${data.temp_f} °F`;
       tempC.className = "tempF";
       tempSwitch.textContent = "show in Celsius";
-    } else {
+    } else if(tempC.className ==="tempF"){
       tempC.textContent = `${data.temp_c} °C`;
       tempC.className = "tempC";
       tempSwitch.textContent = "show in Fahrenheit";
@@ -161,8 +161,7 @@ async function renderData() {
       1192 ||
       1195 ||
       1198 ||
-      1201 ||
-      data.contains("rain"):
+      1201:
       background.className = "rain";
       console.log("rain");
       break;
